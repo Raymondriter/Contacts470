@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    android:background="@android:color/holo_blue_light"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -28,7 +29,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/cardFname"
+                android:id="@+id/cardFnameFull"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -43,7 +44,7 @@
 
 
             <TextView
-                android:id="@+id/cardLname"
+                android:id="@+id/cardLnameFull"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -58,7 +59,7 @@
 
 
             <TextView
-                android:id="@+id/cardPnum"
+                android:id="@+id/cardPnumFull"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -72,7 +73,7 @@
 
 
             <TextView
-                android:id="@+id/cardEmail"
+                android:id="@+id/cardEmailFull"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"

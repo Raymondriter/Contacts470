@@ -1,4 +1,4 @@
-package com.example.contactapp;
+package com.example.contactapp2;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,13 +11,20 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class adapterRV extends RecyclerView.Adapter<adapterRV.ContactsViewHolder> {
 
     private ArrayList<Contacts> mContactsList;
     private Context mCtx;
+    private OnItemClickListener mListener;
 
+    public interface OnItemClickListener{
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener){
+        mListener = listener;
+    }
 
     public adapterRV(Context mCtx, ArrayList<Contacts> ContactsList) {
         this.mCtx = mCtx;
@@ -28,8 +35,8 @@ public class adapterRV extends RecyclerView.Adapter<adapterRV.ContactsViewHolder
     @Override
     public ContactsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mCtx);
-        View view = inflater.inflate(R.layout.contact_card, null);
-        return new ContactsViewHolder(view);
+        View view = inflater.inflate(R.layout.contact_card_main, null);
+        return new ContactsViewHolder(view, mListener);
     }
 
     @Override
@@ -37,8 +44,6 @@ public class adapterRV extends RecyclerView.Adapter<adapterRV.ContactsViewHolder
         Contacts contact = mContactsList.get(position);
         holder.cardFname.setText(contact.getFname());
         holder.cardLname.setText(contact.getLname());
-        holder.cardPnum.setText(contact.getPhonenum());
-        holder.cardEmail.setText(contact.getEmail());
     }
 
     @Override
@@ -46,17 +51,26 @@ public class adapterRV extends RecyclerView.Adapter<adapterRV.ContactsViewHolder
         return mContactsList.size();
     }
 
-    class ContactsViewHolder extends RecyclerView.ViewHolder {
+    public static class ContactsViewHolder extends RecyclerView.ViewHolder {
         TextView cardFname, cardLname, cardPnum, cardEmail;
         CardView cv;
 
-        public ContactsViewHolder(View itemView) {
+        public ContactsViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
             cv = (CardView) itemView.findViewById(R.id.cv);
             cardFname = (TextView) itemView.findViewById(R.id.cardFname);
             cardLname = (TextView) itemView.findViewById(R.id.cardLname);
-            cardPnum = (TextView) itemView.findViewById(R.id.cardPnum);
-            cardEmail = (TextView) itemView.findViewById(R.id.cardEmail);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(listener != null){
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION){
+                            listener.onItemClick(position);
+                        }
+                    }
+                }
+            });
         }
     }
 }

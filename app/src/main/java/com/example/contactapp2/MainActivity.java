@@ -1,4 +1,4 @@
-package com.example.contactapp;
+package com.example.contactapp2;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -8,7 +8,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,12 +15,8 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
-import android.widget.Spinner;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import javax.crypto.Cipher;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -54,6 +49,18 @@ public class MainActivity extends AppCompatActivity {
 
         adapter = new adapterRV(this, mContactsList);
         rv.setAdapter(adapter);
+        adapter.setOnItemClickListener(new adapterRV.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Intent i = new Intent(getBaseContext(), fullcontact.class);
+                i.putExtra("first", mContactsList.get(position).getFname());
+                i.putExtra("last", mContactsList.get(position).getLname());
+                i.putExtra("email", mContactsList.get(position).getEmail());
+                i.putExtra("phone", mContactsList.get(position).getPhonenum());
+                startActivity(i);
+
+            }
+        });
     }
 
     private View.OnClickListener onAddingListener() {

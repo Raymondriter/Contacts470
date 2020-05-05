@@ -1,9 +1,4 @@
-package com.example.contactapp;
-
-import android.text.Editable;
-
-import java.util.HashMap;
-import java.util.Map;
+package com.example.contactapp2;
 
 public class Contacts {
     private String fname;
@@ -18,6 +13,8 @@ public class Contacts {
         this.phonenum = phonenum;
         this.email = email;
     }
+
+
 
 
     public String getFname() {
